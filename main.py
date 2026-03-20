@@ -24,6 +24,10 @@ class Pedido(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     produto = Column(String(100), nullable=False)
 
+    #Chave estrangeira
+    # Onde tem o foreign key, tem o relacionamento muitos para um (muitos pedidos para um usuário
+    usuario_id = Column(Integer, ForeignKey())
+
     def __init__(self, produto):
         self.produto = produto
 
