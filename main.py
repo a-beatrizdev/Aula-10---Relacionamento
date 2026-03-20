@@ -20,7 +20,7 @@ class Usuario(Base):
     
     #Função para imprimir
     def __repr__(self):
-        return f"Usuario - id={self.id} - nome={self.nome}"
+        return f"Usuario = id={self.id} - nome={self.nome}"
     
 class Pedido(Base):
     __tablename__ = "pedidos"
@@ -39,7 +39,7 @@ class Pedido(Base):
         self.produto = produto
 
     def __repr__(self):
-        return f"Pedido - id={self.id} - Produto={self.produto}"
+        return f"Pedido = id={self.id} - Produto={self.produto}"
     
 engine = create_engine("sqlite:///loja.db")
 
@@ -49,21 +49,39 @@ Session = sessionmaker(bind=engine)
 
 with Session() as session:
     #Criando um objeto
-    usuario1 = Usuario("Gabriel")
+    usuario1 = Usuario("Paulo")
 
     #Criando os pedidos
-    pedido1 = Pedido("Mouse")
-    pedido2 = Pedido("Notebook")
-    pedido3 = Pedido("TV")
+    pedido1 = Pedido("Skate")
+    pedido2 = Pedido("Fone")
+    pedido3 = Pedido("Cadeira de rodas")
 
     #Associando pedidos aos usuários
-    usuario1.pedidos.append(pedido1)
-    usuario1.pedidos.append(pedido2)
-    usuario1.pedidos.append(pedido3)
+    # usuario1.pedidos.append(pedido1)
+    # usuario1.pedidos.append(pedido2)
+    # usuario1.pedidos.append(pedido3)
 
-    #Salvar no banco
-    session.add(usuario1)
-    session.commit() 
+    # #Salvar no banco
+    # session.add(usuario1)
+    # session.commit() 
+
+    #Buscar todos os usuários no banco:
+    usuarios = session.query(Usuario).all()
+
+    for user in usuarios:
+        print(user)
+
+    #Pegando os pedidos
+    print(f"Pedidos do usuario 1: {usuarios[0].pedidos}")
+
+    for user in usuarios:
+        print(f"\nusuarios: {user.nome}")
+        for pedido in user.pedidos:
+            print(f"Pedido: {pedido.produto}")
+        
+
+
+
     
     
 
