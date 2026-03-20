@@ -12,6 +12,9 @@ class Usuario(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(100), nullable=False)
 
+    #Relacionamento
+    pedidos = relationship("Pedido", back_populates="usuario")
+
     def __init__(self, nome):
         self.nome = nome
     
@@ -26,13 +29,23 @@ class Pedido(Base):
 
     #Chave estrangeira
     # Onde tem o foreign key, tem o relacionamento muitos para um (muitos pedidos para um usuário
-    usuario_id = Column(Integer, ForeignKey())
+    usuario_id = Column(Integer, ForeignKey("usuarios.id"))
+
+    # Relacionamento
+    usuario = relationship("Usuario", back_populates="pedidos")
+
 
     def __init__(self, produto):
         self.produto = produto
 
     def __repr__(self):
         return f"Pedido - id={self.id} - Produto={self.produto}"
+    
+engine = create_engine("sqlite:///loja.db")
+
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
     
 
     
