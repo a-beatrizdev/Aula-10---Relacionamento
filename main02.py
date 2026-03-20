@@ -33,10 +33,11 @@ class Funcionario(Base):
     #Relacionamento
     departamento = relationship("Departamento", back_populates="funcionarios")
 
-    def __init__(self, nome, cargo, salario):
+    def __init__(self, nome, cargo, salario, departamento):
         self.nome = nome
         self.cargo = cargo
         self.salario = salario
+        self.departamento = departamento
 
     #Função para imprimir
     def __repr__(self):
