@@ -46,7 +46,27 @@ engine = create_engine("sqlite:///loja.db")
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
+
+with Session() as session:
+    #Criando um objeto
+    usuario1 = Usuario("Gabriel")
+
+    #Criando os pedidos
+    pedido1 = Pedido("Mouse")
+    pedido2 = Pedido("Notebook")
+    pedido3 = Pedido("TV")
+
+    #Associando pedidos aos usuários
+    usuario1.pedidos.append(pedido1)
+    usuario1.pedidos.append(pedido2)
+    usuario1.pedidos.append(pedido3)
+
+    #Salvar no banco
+    session.add(usuario1)
+    session.commit() 
     
+    
+
 
     
     
