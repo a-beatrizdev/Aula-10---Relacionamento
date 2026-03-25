@@ -76,19 +76,41 @@ Session = sessionmaker(bind=engine)
 #         print(f"Ocorreu um erro {erro}")
 
 # Função para listar os funcionários
-def listar_funcionarios():
+# def listar_funcionarios():
+#     #Como abrir uma sessão com o banco?
+#     with Session() as session:
+#         try:
+#             #Buscar todos os funcionários dos departamentos.
+#             funcionarios = session.query(Funcionario).all() 
+#             for funcionario in funcionarios:
+#                 print(f"Nome do funcionario: {funcionario.nome} - Departamento: {funcionario.departamento.nome}")
+           
+#         except Exception as erro:
+#             session.rollback()
+#             print(f"Ocorreu um erro {erro}")
+
+# listar_funcionarios()
+
+#Criar a função para listar os departamentos e seus funcionários
+
+def listar_departamentos():
     #Como abrir uma sessão com o banco?
     with Session() as session:
         try:
-            #Buscar todos os funcionários dos departamentos.
-            funcionarios = session.query(Funcionario).all() 
-            print(funcionarios)
-        
+            departamentos = session.query(Departamento).all() 
+            for d in departamentos:
+                print(f"\n--- Departamento {d.nome} ---")
+                for funcionario in d.funcionarios:
+                    print(f"Nome: {funcionario.nome} - Cargo {funcionario.cargo} - salario: R$ {funcionario.salario}")
+           
         except Exception as erro:
             session.rollback()
             print(f"Ocorreu um erro {erro}")
 
-listar_funcionarios()
+listar_departamentos()
+
+
+
 
 
     
