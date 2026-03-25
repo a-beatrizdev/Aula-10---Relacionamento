@@ -51,29 +51,39 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 
 
-with Session() as session:
-    try:
-        #Criando os departamentos
-        ti = Departamento(nome="Tecnicos de T.I")
-        financeiro = Departamento(nome="Financeiro")
+# with Session() as session:
+#     try:
+#         #Criando os departamentos
+#         ti = Departamento(nome="Tecnicos de T.I")
+#         financeiro = Departamento(nome="Financeiro")
 
-        #Duas formas de associar os funcionários no departamento 
-        # Opção 1
-        func1 = Funcionario("Pablo", "Dev Front-end", 2.00)
-        ti.funcionarios.append(func1)
+#         #Duas formas de associar os funcionários no departamento 
+#         # Opção 1
+#         # func1 = Funcionario("Pablo", "Dev Front-end", 2.00)
+#         # ti.funcionarios.append(func1)
 
-        # Opção 2
-        func2 = Funcionario("Gustavo", "Dev Back-end", 20.000, departamento=ti)
-        func3 = Funcionario("Ana Luiza", "Dev Full-stack", 31.00, departamento=ti)
-        func4 = Funcionario("Yasmim", "Gerente Financeiro", 12.00, departamento=financeiro)
+#         # Opção 2
+#         func2 = Funcionario("Gustavo", "Dev Back-end", 20.000, departamento=ti)
+#         func3 = Funcionario("Ana Luiza", "Dev Full-stack", 31.00, departamento=ti)
+#         func4 = Funcionario("Yasmim", "Gerente Financeiro", 12.00, departamento=financeiro)
 
-        session.add_all([ti, financeiro])
-        session.commit()
-        print(f"Departamentos e funcionários inseridos!")
+#         session.add_all([ti, financeiro])
+#         session.commit()
+#         print(f"Departamentos e funcionários inseridos!")
    
-    except Exception as erro:
-        session.rollback()
-        print(f"Ocorreu um erro {erro}")
+#     except Exception as erro:
+#         session.rollback()
+#         print(f"Ocorreu um erro {erro}")
+
+# Função para listar os funcionários
+def listar_funcionarios():
+    #Como abrir uma sessão com o banco?
+    with Session() as session:
+        try:
+            pass
+        except Exception as erro:
+            session.rollback()
+            print(f"Ocorreu um erro {erro}")
 
 
     
