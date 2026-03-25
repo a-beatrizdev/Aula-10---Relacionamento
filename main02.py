@@ -80,10 +80,15 @@ def listar_funcionarios():
     #Como abrir uma sessão com o banco?
     with Session() as session:
         try:
-            pass
+            #Buscar todos os funcionários dos departamentos.
+            funcionarios = session.query(Funcionario).all() 
+            print(funcionarios)
+        
         except Exception as erro:
             session.rollback()
             print(f"Ocorreu um erro {erro}")
+
+listar_funcionarios()
 
 
     
